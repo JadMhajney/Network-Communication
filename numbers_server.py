@@ -9,19 +9,20 @@ def calculate(x, y, z):
     INT32_MAX = 2_147_483_647
     x = int(x)
     y = int(y)
-    match z:
-        case "+":
-            res = x + y
-        case "-":
-            res = x - y
-        case "*":
-            res = x * y
-        case "/":
-            if y == 0:
-                return "error: division by zero"
-            res = round(x / y, 2)
-        case "^":
-            res = x ** y
+    if z == "+":
+        res = x + y
+    elif z == "-":
+        res = x - y
+    elif z == "*":
+        res = x * y
+    elif z == "/":
+        if y == 0:
+            return "error: division by zero"
+        res = round(x / y, 2)
+    elif z == "^":
+        res = x ** y
+    else:
+        return "error: invalid operator"
 
     if res < INT32_MIN or res > INT32_MAX:
         return "error: result is too big"
