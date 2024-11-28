@@ -1,0 +1,149 @@
+Test Cases
+1. Authentication
+
+Test Case 1.1: Valid username and password
+Input: User: Bob, Password: simplepass
+Expected Output: Hi Bob, good to see you.
+
+
+Test Case 1.2: Invalid username
+Input: User: Unknown, Password: simplepass
+Expected Output: Failed to login.
+
+
+Test Case 1.3: Invalid password
+Input: User: Bob, Password: wrongpass
+Expected Output: Failed to login.
+
+
+Test Case 1.4: Empty username or password
+Input: User: , Password: simplepass or User: Bob, Password:
+Expected Output: Failed to login.
+
+
+Test Case 1.5: Username and password with special characters
+Input: User: Bob!, Password: @simplepass
+Expected Output: Failed to login. (if not allowed)
+
+
+2. calculate:X Y Z Command
+
+Test Case 2.1: Valid calculation with addition
+Input: calculate:10 + 20
+Expected Output: response: 30.
+
+
+Test Case 2.2: Division with rounding
+Input: calculate:7 / 3
+Expected Output: response: 2.33.
+
+
+Test Case 2.3: Power operation with large result
+Input: calculate:10 ^ 10
+Expected Output: error: result is too big
+
+
+Test Case 2.4: Division by zero
+Input: calculate:10 / 0
+Expected Output: error: division by zero
+
+
+Test Case 2.5: Invalid operator
+Input: calculate:10 % 3
+Expected Output: error: unknown command
+
+
+3. max:(X1 X2 ... Xn) Command
+
+Test Case 3.1: Valid input with multiple numbers
+Input: max:(1 2 3 4)
+Expected Output: the maximum is 4.
+
+
+Test Case 3.2: All negative numbers
+Input: max:(-10 -20 -5)
+Expected Output: the maximum is -5.
+
+
+Test Case 3.3: Single number
+Input: max:(100)
+Expected Output: the maximum is 100.
+
+@@@@@@@@@@@@@@@@@@@@
+Test Case 3.4: Empty list
+Input: max:()
+Expected Output: error: invalid input format
+
+
+Test Case 3.5: Non-numeric values
+Input: max:(1 two 3)
+Expected Output: error: invalid literal for int()
+
+4. factors:X Command
+
+Test Case 4.1: Prime number
+Input: factors:17
+Expected Output: the prime factors of 17 are: 17
+
+
+Test Case 4.2: Composite number
+Input: factors:18
+Expected Output: the prime factors of 18 are: 2, 3
+
+
+Test Case 4.3: Number with repeated prime factors
+Input: factors:28
+Expected Output: the prime factors of 28 are: 2, 7
+
+
+Test Case 4.4: Negative number
+Input: factors:-30
+Expected Output: error: invalid input
+
+
+Test Case 4.5: Non-integer input
+Input: factors:abc
+Expected Output: error: invalid literal for int()
+
+
+5. quit Command
+
+Test Case 5.1: Quit immediately after logging in
+Input: quit
+Expected Output: Connection closes gracefully.
+
+
+Test Case 5.2: Quit after multiple commands
+Input: factors:30, max:(1 2 3), quit
+Expected Output: Server processes the commands, then closes the connection.
+
+
+6. General Invalid Input
+
+Test Case 6.1: Inputting a command before logging in
+Input: max:(1 2 3)
+Expected Output: Server disconnects the client.
+
+
+Test Case 6.2: Sending invalidly formatted commands
+Input: random text
+Expected Output: error: unknown command
+
+
+7. Edge Cases
+
+Edge Case 7.1: Multiple clients logging in simultaneously
+Expected Outcome: Server handles all clients correctly without crashing or mixing up their responses.
+
+Edge Case 7.2: Long input strings
+Input: A command exceeding the buffer size (e.g., calculate: with 1,000,000 characters).
+Expected Outcome: Server gracefully handles or rejects the input.
+
+Edge Case 7.3: No input after connection
+Input: Client connects but sends nothing.
+Expected Outcome: Server eventually disconnects the client due to inactivity.
+
+
+Edge Case 7.4: Invalid port or hostname
+Input: Run client with a non-existent hostname or an unused port.
+Expected Outcome: Client fails to connect and displays an appropriate error message.
